@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900" role="img" aria-label="Cztery typy węzłów w grze">
+<title>Cztery typy węzłów w grze</title>
+<desc>Ilustracja przedstawiająca generator, odbiornik, wzmacniacz i tłumik.</desc>
+<defs>
+  <radialGradient id="bgrad-nodes" cx="18%" cy="0%" r="95%">
+    <stop offset="0%" stop-color="#111a30"/>
+    <stop offset="55%" stop-color="#0c1120"/>
+    <stop offset="100%" stop-color="#070a12"/>
+  </radialGradient>
+  <linearGradient id="pulse-nodes" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#4cf1e0"/>
+    <stop offset="100%" stop-color="#b39bff"/>
+  </linearGradient>
+  <filter id="glow-nodes" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="6" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
+<rect width="1400" height="900" fill="url(#bgrad-nodes)"/>
+<circle cx="805.5" cy="794.4" r="1.97" fill="#7482a8" opacity="0.42"/>
+<circle cx="701.7" cy="772.2" r="1.64" fill="#7482a8" opacity="0.49"/>
+<circle cx="276.0" cy="756.9" r="1.14" fill="#7482a8" opacity="0.42"/>
+<circle cx="767.8" cy="735.4" r="1.79" fill="#7482a8" opacity="0.50"/>
+<circle cx="1080.3" cy="344.3" r="1.87" fill="#7482a8" opacity="0.27"/>
+<circle cx="1100.4" cy="337.0" r="1.77" fill="#7482a8" opacity="0.27"/>
+<circle cx="129.9" cy="783.6" r="1.14" fill="#7482a8" opacity="0.42"/>
+<circle cx="315.5" cy="651.9" r="1.25" fill="#7482a8" opacity="0.29"/>
+<circle cx="102.1" cy="347.7" r="1.30" fill="#7482a8" opacity="0.34"/>
+<circle cx="436.4" cy="278.3" r="2.04" fill="#7482a8" opacity="0.50"/>
+<circle cx="197.3" cy="253.5" r="0.65" fill="#7482a8" opacity="0.50"/>
+<circle cx="577.6" cy="157.3" r="1.07" fill="#7482a8" opacity="0.49"/>
+<circle cx="4.0" cy="4.6" r="1.62" fill="#7482a8" opacity="0.24"/>
+<circle cx="1196.6" cy="746.9" r="1.10" fill="#7482a8" opacity="0.29"/>
+<circle cx="1273.9" cy="571.0" r="1.24" fill="#7482a8" opacity="0.34"/>
+<circle cx="1227.0" cy="527.5" r="0.78" fill="#7482a8" opacity="0.30"/>
+<circle cx="1194.7" cy="727.5" r="2.12" fill="#7482a8" opacity="0.38"/>
+<circle cx="884.4" cy="777.3" r="2.05" fill="#7482a8" opacity="0.31"/>
+<circle cx="1080.1" cy="638.1" r="1.99" fill="#7482a8" opacity="0.41"/>
+<circle cx="662.7" cy="283.9" r="1.93" fill="#7482a8" opacity="0.17"/>
+<circle cx="234.4" cy="360.7" r="0.70" fill="#7482a8" opacity="0.40"/>
+<circle cx="69.7" cy="63.3" r="1.99" fill="#7482a8" opacity="0.33"/>
+<circle cx="275.0" cy="396.6" r="0.87" fill="#7482a8" opacity="0.24"/>
+<circle cx="1311.7" cy="313.7" r="1.16" fill="#7482a8" opacity="0.46"/>
+<circle cx="22.3" cy="524.8" r="1.07" fill="#7482a8" opacity="0.42"/>
+<circle cx="704.1" cy="152.8" r="1.33" fill="#7482a8" opacity="0.20"/>
+<circle cx="1282.4" cy="153.0" r="0.91" fill="#7482a8" opacity="0.39"/>
+<circle cx="1170.4" cy="216.1" r="1.12" fill="#7482a8" opacity="0.20"/>
+<circle cx="1186.9" cy="166.2" r="1.68" fill="#7482a8" opacity="0.31"/>
+<circle cx="1054.7" cy="426.5" r="1.55" fill="#7482a8" opacity="0.31"/>
+<circle cx="907.1" cy="634.5" r="2.24" fill="#7482a8" opacity="0.49"/>
+<circle cx="1219.3" cy="898.7" r="0.74" fill="#7482a8" opacity="0.16"/>
+<circle cx="265.0" cy="846.7" r="1.77" fill="#7482a8" opacity="0.45"/>
+<circle cx="335.6" cy="101.0" r="2.16" fill="#7482a8" opacity="0.23"/>
+<circle cx="946.4" cy="737.2" r="0.75" fill="#7482a8" opacity="0.49"/>
+<circle cx="639.4" cy="753.5" r="1.90" fill="#7482a8" opacity="0.42"/>
+<circle cx="882.4" cy="179.0" r="2.37" fill="#7482a8" opacity="0.36"/>
+<circle cx="1307.1" cy="380.6" r="1.01" fill="#7482a8" opacity="0.40"/>
+<circle cx="835.1" cy="564.6" r="1.00" fill="#7482a8" opacity="0.18"/>
+<circle cx="948.9" cy="349.0" r="2.30" fill="#7482a8" opacity="0.19"/>
+
+<g>
+<rect x="80" y="240" width="280" height="420" rx="26" fill="#111a30" stroke="#22315a" stroke-width="1.5"/>
+<line x1="266.0" y1="430.0" x2="288.0" y2="430.0" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="252.5" y1="462.5" x2="268.1" y2="478.1" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="220.0" y1="476.0" x2="220.0" y2="498.0" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="187.5" y1="462.5" x2="171.9" y2="478.1" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="174.0" y1="430.0" x2="152.0" y2="430.0" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="187.5" y1="397.5" x2="171.9" y2="381.9" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="220.0" y1="384.0" x2="220.0" y2="362.0" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><line x1="252.5" y1="397.5" x2="268.1" y2="381.9" stroke="#ffb454" stroke-width="4" stroke-linecap="round"/><circle cx="220" cy="430" r="38" fill="#ffb454" filter="url(#glow-nodes)"/>
+<text x="220" y="600" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="#eef2fb">Generator</text>
+<text x="220" y="632" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#7482a8">źródło impulsu</text>
+</g><g>
+<rect x="400" y="240" width="280" height="420" rx="26" fill="#111a30" stroke="#22315a" stroke-width="1.5"/>
+<circle cx="540" cy="430" r="60" fill="none" stroke="#4cf1e0" stroke-width="3" opacity="0.35"/>
+<circle cx="540" cy="430" r="40" fill="none" stroke="#4cf1e0" stroke-width="3" opacity="0.65"/>
+<circle cx="540" cy="430" r="18" fill="#4cf1e0" filter="url(#glow-nodes)"/>
+<text x="540" y="600" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="#eef2fb">Odbiornik</text>
+<text x="540" y="632" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#7482a8">cel trasy</text>
+</g><g>
+<rect x="720" y="240" width="280" height="420" rx="26" fill="#111a30" stroke="#22315a" stroke-width="1.5"/>
+<path d="M 826 390 L 860 412 L 826 434" fill="none" stroke="#b39bff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/><path d="M 826 420 L 860 442 L 826 464" fill="none" stroke="#b39bff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/><path d="M 826 450 L 860 472 L 826 494" fill="none" stroke="#b39bff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<text x="860" y="600" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="#eef2fb">Wzmacniacz</text>
+<text x="860" y="632" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#7482a8">podwaja moc</text>
+</g><g>
+<rect x="1040" y="240" width="280" height="420" rx="26" fill="#111a30" stroke="#22315a" stroke-width="1.5"/>
+<path d="M 1110 430 Q 1135 384 1160 430 T 1210 430 T 1260 430" fill="none" stroke="#7482a8" stroke-width="4" opacity="0.85"/>
+<path d="M 1110 430 Q 1135 410 1160 430 T 1210 430 T 1260 430" fill="none" stroke="#7482a8" stroke-width="4" opacity="0.4"/>
+<text x="1180" y="600" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="#eef2fb">Tłumik</text>
+<text x="1180" y="632" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#7482a8">spowalnia falę</text>
+</g>
+</svg>

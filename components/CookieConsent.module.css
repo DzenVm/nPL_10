@@ -1,0 +1,53 @@
+.banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  padding: var(--sp-4);
+  display: flex;
+  justify-content: center;
+  animation: rise var(--dur-med) var(--ease-out);
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 62rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: var(--sp-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  flex: 1 1 24rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+.text a {
+  color: var(--pulse-cyan);
+}
+
+.buttons {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}

@@ -1,0 +1,59 @@
+.page {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.header {
+  max-width: 46rem;
+  margin-bottom: var(--sp-6);
+}
+
+.updated {
+  color: var(--ink-3);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+.prose {
+  max-width: 62rem;
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.prose h2 {
+  font-size: 1.35rem;
+  margin-top: var(--sp-2);
+}
+
+.prose h3 {
+  font-size: 1.1rem;
+}
+
+.prose p,
+.prose li {
+  color: var(--ink-2);
+}
+
+.prose ul,
+.prose ol {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose section {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.prose a {
+  color: var(--pulse-cyan);
+}
+
+.prose strong {
+  color: var(--ink-1);
+}

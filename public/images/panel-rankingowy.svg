@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900" role="img" aria-label="Panel rankingowy sezonu">
+<title>Panel rankingowy sezonu</title>
+<desc>Abstrakcyjna wizualizacja krzywej rankingu i tabeli pozycji.</desc>
+<defs>
+  <radialGradient id="bgrad-rank" cx="18%" cy="0%" r="95%">
+    <stop offset="0%" stop-color="#111a30"/>
+    <stop offset="55%" stop-color="#0c1120"/>
+    <stop offset="100%" stop-color="#070a12"/>
+  </radialGradient>
+  <linearGradient id="pulse-rank" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#4cf1e0"/>
+    <stop offset="100%" stop-color="#b39bff"/>
+  </linearGradient>
+  <filter id="glow-rank" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="6" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
+<rect width="1400" height="900" fill="url(#bgrad-rank)"/>
+<circle cx="700.8" cy="468.8" r="1.26" fill="#7482a8" opacity="0.39"/>
+<circle cx="410.9" cy="78.6" r="1.68" fill="#7482a8" opacity="0.47"/>
+<circle cx="480.1" cy="841.1" r="2.26" fill="#7482a8" opacity="0.23"/>
+<circle cx="888.0" cy="124.3" r="0.62" fill="#7482a8" opacity="0.46"/>
+<circle cx="728.4" cy="386.3" r="1.30" fill="#7482a8" opacity="0.50"/>
+<circle cx="196.4" cy="771.7" r="0.68" fill="#7482a8" opacity="0.17"/>
+<circle cx="409.2" cy="74.8" r="1.92" fill="#7482a8" opacity="0.41"/>
+<circle cx="177.7" cy="615.6" r="1.91" fill="#7482a8" opacity="0.31"/>
+<circle cx="707.1" cy="711.1" r="2.38" fill="#7482a8" opacity="0.49"/>
+<circle cx="1282.4" cy="725.0" r="2.36" fill="#7482a8" opacity="0.37"/>
+<circle cx="889.2" cy="574.8" r="2.33" fill="#7482a8" opacity="0.50"/>
+<circle cx="496.4" cy="14.0" r="1.92" fill="#7482a8" opacity="0.37"/>
+<circle cx="1326.4" cy="600.0" r="0.64" fill="#7482a8" opacity="0.33"/>
+<circle cx="975.9" cy="423.6" r="2.06" fill="#7482a8" opacity="0.45"/>
+<circle cx="313.2" cy="181.7" r="1.89" fill="#7482a8" opacity="0.29"/>
+<circle cx="1099.4" cy="733.7" r="1.82" fill="#7482a8" opacity="0.23"/>
+<circle cx="309.6" cy="329.6" r="1.58" fill="#7482a8" opacity="0.35"/>
+<circle cx="1167.4" cy="384.9" r="0.74" fill="#7482a8" opacity="0.40"/>
+<circle cx="164.0" cy="705.4" r="0.68" fill="#7482a8" opacity="0.19"/>
+<circle cx="913.3" cy="458.0" r="1.07" fill="#7482a8" opacity="0.28"/>
+<circle cx="1341.7" cy="395.2" r="0.75" fill="#7482a8" opacity="0.39"/>
+<circle cx="1045.4" cy="437.7" r="0.94" fill="#7482a8" opacity="0.21"/>
+<circle cx="394.0" cy="344.4" r="2.35" fill="#7482a8" opacity="0.37"/>
+<circle cx="1141.5" cy="458.9" r="1.77" fill="#7482a8" opacity="0.38"/>
+<circle cx="1325.3" cy="127.4" r="0.86" fill="#7482a8" opacity="0.23"/>
+<circle cx="431.6" cy="452.3" r="0.90" fill="#7482a8" opacity="0.20"/>
+<circle cx="867.6" cy="157.1" r="0.64" fill="#7482a8" opacity="0.29"/>
+<circle cx="1377.4" cy="747.6" r="1.73" fill="#7482a8" opacity="0.23"/>
+<circle cx="557.9" cy="200.6" r="2.26" fill="#7482a8" opacity="0.42"/>
+<circle cx="561.7" cy="579.7" r="1.52" fill="#7482a8" opacity="0.35"/>
+<circle cx="1258.2" cy="376.9" r="1.38" fill="#7482a8" opacity="0.36"/>
+<circle cx="467.0" cy="592.8" r="2.37" fill="#7482a8" opacity="0.28"/>
+<circle cx="910.0" cy="369.7" r="0.99" fill="#7482a8" opacity="0.25"/>
+<circle cx="1364.7" cy="431.8" r="0.95" fill="#7482a8" opacity="0.18"/>
+<circle cx="1349.5" cy="863.5" r="1.12" fill="#7482a8" opacity="0.36"/>
+<circle cx="560.5" cy="278.4" r="0.71" fill="#7482a8" opacity="0.15"/>
+<circle cx="122.8" cy="253.6" r="1.89" fill="#7482a8" opacity="0.22"/>
+<circle cx="14.4" cy="851.3" r="2.38" fill="#7482a8" opacity="0.30"/>
+<circle cx="1102.7" cy="144.6" r="1.56" fill="#7482a8" opacity="0.31"/>
+<circle cx="792.8" cy="392.9" r="1.39" fill="#7482a8" opacity="0.17"/>
+<circle cx="1323.6" cy="668.8" r="0.85" fill="#7482a8" opacity="0.50"/>
+<circle cx="1238.4" cy="87.6" r="1.84" fill="#7482a8" opacity="0.41"/>
+<circle cx="631.8" cy="573.7" r="0.72" fill="#7482a8" opacity="0.37"/>
+<circle cx="918.0" cy="265.9" r="0.91" fill="#7482a8" opacity="0.19"/>
+<circle cx="82.0" cy="482.4" r="1.03" fill="#7482a8" opacity="0.44"/>
+<circle cx="453.0" cy="701.3" r="1.22" fill="#7482a8" opacity="0.40"/>
+<circle cx="850.7" cy="294.0" r="1.56" fill="#7482a8" opacity="0.29"/>
+<circle cx="976.0" cy="730.8" r="0.70" fill="#7482a8" opacity="0.34"/>
+<circle cx="62.8" cy="841.4" r="2.00" fill="#7482a8" opacity="0.24"/>
+<circle cx="880.1" cy="557.8" r="1.73" fill="#7482a8" opacity="0.39"/>
+
+<line x1="90" y1="90" x2="850" y2="90" stroke="#22315a" stroke-width="1" opacity="0.5"/><line x1="90" y1="195" x2="850" y2="195" stroke="#22315a" stroke-width="1" opacity="0.5"/><line x1="90" y1="300" x2="850" y2="300" stroke="#22315a" stroke-width="1" opacity="0.5"/><line x1="90" y1="405" x2="850" y2="405" stroke="#22315a" stroke-width="1" opacity="0.5"/><line x1="90" y1="510" x2="850" y2="510" stroke="#22315a" stroke-width="1" opacity="0.5"/>
+<path d="M 90.0 337.3 L 126.2 318.3 L 162.4 312.9 L 198.6 307.7 L 234.8 320.0 L 271.0 334.5 L 307.1 353.6 L 343.3 368.8 L 379.5 342.5 L 415.7 355.6 L 451.9 355.2 L 488.1 359.1 L 524.3 340.2 L 560.5 317.4 L 596.7 311.9 L 632.9 318.9 L 669.0 319.3 L 705.2 296.8 L 741.4 281.9 L 777.6 273.5 L 813.8 255.1 L 850.0 260.6 L 850.0 510.0 L 90 510.0 Z" fill="url(#pulse-rank)" opacity="0.14"/>
+<path d="M 90.0 337.3 L 126.2 318.3 L 162.4 312.9 L 198.6 307.7 L 234.8 320.0 L 271.0 334.5 L 307.1 353.6 L 343.3 368.8 L 379.5 342.5 L 415.7 355.6 L 451.9 355.2 L 488.1 359.1 L 524.3 340.2 L 560.5 317.4 L 596.7 311.9 L 632.9 318.9 L 669.0 319.3 L 705.2 296.8 L 741.4 281.9 L 777.6 273.5 L 813.8 255.1 L 850.0 260.6" fill="none" stroke="url(#pulse-rank)" stroke-width="3.5" filter="url(#glow-rank)"/>
+<g>
+<circle cx="926" cy="110" r="15" fill="#ffb454" stroke="#22315a"/>
+<text x="926" y="115" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#070a12">1</text>
+<rect x="954" y="98" width="277.7" height="24" rx="12" fill="url(#pulse-rank)" opacity="0.95"/>
+</g><g>
+<circle cx="926" cy="172" r="15" fill="#111a30" stroke="#22315a"/>
+<text x="926" y="177" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#7482a8">2</text>
+<rect x="954" y="160" width="336.7" height="24" rx="12" fill="#111a30" opacity="0.8"/>
+</g><g>
+<circle cx="926" cy="234" r="15" fill="#111a30" stroke="#22315a"/>
+<text x="926" y="239" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#7482a8">3</text>
+<rect x="954" y="222" width="398.5" height="24" rx="12" fill="#111a30" opacity="0.8"/>
+</g><g>
+<circle cx="926" cy="296" r="15" fill="#111a30" stroke="#22315a"/>
+<text x="926" y="301" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#7482a8">4</text>
+<rect x="954" y="284" width="359.4" height="24" rx="12" fill="#111a30" opacity="0.8"/>
+</g><g>
+<circle cx="926" cy="358" r="15" fill="#111a30" stroke="#22315a"/>
+<text x="926" y="363" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#7482a8">5</text>
+<rect x="954" y="346" width="148.7" height="24" rx="12" fill="#111a30" opacity="0.8"/>
+</g><g>
+<circle cx="926" cy="420" r="15" fill="#111a30" stroke="#22315a"/>
+<text x="926" y="425" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#7482a8">6</text>
+<rect x="954" y="408" width="199.5" height="24" rx="12" fill="#111a30" opacity="0.8"/>
+</g>
+<text x="90" y="64" font-family="sans-serif" font-size="20" font-weight="700" fill="#eef2fb">Krzywa formy sezonu</text>
+<text x="954" y="64" font-family="sans-serif" font-size="20" font-weight="700" fill="#eef2fb">Tabela pozycji</text>
+</svg>

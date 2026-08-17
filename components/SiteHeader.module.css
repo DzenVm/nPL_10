@@ -1,0 +1,104 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+.markDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--grad-pulse);
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--pulse-cyan) 55%, transparent);
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.nav a {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease-out);
+  position: relative;
+  padding-block: 0.25rem;
+}
+
+.nav a:hover {
+  color: var(--ink-1);
+}
+
+.nav a[aria-current="page"] {
+  color: var(--pulse-cyan);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.toggle {
+  display: inline-flex;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  color: var(--ink-1);
+  cursor: pointer;
+}
+
+.mobilePanel {
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-raised);
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-3) 0;
+}
+
+.mobileList a {
+  padding: var(--sp-3) var(--sp-1);
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 1.02rem;
+}
+
+.mobileList a:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 860px) {
+  .nav {
+    display: flex;
+  }
+  .toggle {
+    display: none;
+  }
+}
