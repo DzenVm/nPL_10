@@ -22,7 +22,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Steruj siecią impulsów energii — darmowa gra logiczno-strategiczna",
+    default: "Steruj siecią impulsów energii — gra logiczno-strategiczna",
     template: "%s",
   },
   description: SITE_DESCRIPTION,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "gra strategiczna",
     "łamigłówka online",
     "gra bez pobierania",
-    "darmowa gra w przeglądarce",
+    "gra w przeglądarce",
   ],
   alternates: {
     canonical: "/",
@@ -44,12 +44,12 @@ export const metadata: Metadata = {
     locale: "pl_PL",
     url: SITE_URL,
     siteName: "kewabort.online",
-    title: "Steruj siecią impulsów energii — darmowa gra logiczno-strategiczna",
+    title: "Steruj siecią impulsów energii — gra logiczno-strategiczna",
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Steruj siecią impulsów energii — darmowa gra logiczno-strategiczna",
+    title: "Steruj siecią impulsów energii — gra logiczno-strategiczna",
     description: SITE_DESCRIPTION,
   },
   other: {

@@ -33,11 +33,11 @@ export function SiteFooter() {
           </div>
 
           <div className={styles.col}>
-            <h4>Zgodność</h4>
+            <h4>O grze</h4>
             <p>
-              Gra jest bezpłatna i oparta wyłącznie na umiejętnościach. Nie zawiera hazardu,
-              zakładów ani mechanizmów losowych wymiennych na prawdziwe pieniądze. Klasyfikacja
-              wiekowa: PEGI 3.
+              Rozgrywka oparta wyłącznie na umiejętnościach — planujesz trasę i reagujesz
+              na zmiany siatki w czasie rzeczywistym. Działa w każdej nowoczesnej
+              przeglądarce, bez instalacji.
             </p>
           </div>
 
@@ -60,10 +60,10 @@ export function SiteFooter() {
           <span>© {year} kewabort.online · Wszelkie prawa zastrzeżone</span>
           <span className={styles.badges}>
             <span className="pill">
-              <ShieldIcon size={14} /> Bez hazardu
+              <ShieldIcon size={14} /> Fair play
             </span>
-            <span className="pill">PEGI 3</span>
             <span className="pill">RODO</span>
+            <span className="pill">Dostępność klawiaturowa</span>
           </span>
         </div>
       </div>

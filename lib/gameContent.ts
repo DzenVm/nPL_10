@@ -90,22 +90,22 @@ export const GAME_MODES = [
     title: "Turniej tygodniowy",
     cadence: "drabinka · zapisy dobrowolne",
     description:
-      "Ośmioosobowe (i większe) drabinki pucharowe rozgrywane w ciągu tygodnia. Udział jest bezpłatny, a nagrody mają wyłącznie charakter kosmetyczny.",
+      "Ośmioosobowe (i większe) drabinki pucharowe rozgrywane w ciągu tygodnia. Każda runda to nowo wygenerowana siatka — do finału dochodzi jedna osoba z każdej pary.",
   },
 ] as const;
 
 export const FAQ_ITEMS = [
   {
-    q: "Czy gra jest darmowa?",
-    a: "Tak. Kampania, wyzwanie dnia, pojedynki rankingowe i turnieje tygodniowe są dostępne bez opłat. Rozwój finansujemy z nieinwazyjnych reklam oraz opcjonalnych, wyłącznie kosmetycznych dodatków.",
+    q: "Czy każdy wygenerowany układ da się rozwiązać?",
+    a: "Tak. Generator plansz zawsze wyznacza co najmniej jedną poprawną trasę między generatorem a odbiornikiem, zanim poziom się rozpocznie — nie trafisz na układ bez rozwiązania.",
   },
   {
-    q: "Czy trzeba płacić, żeby wygrywać?",
-    a: "Nie. Wynik zależy od tego, jak szybko i efektywnie połączysz siatkę — nie od wydanych pieniędzy. Nie ma mechanizmów płać-aby-wygrać.",
+    q: "Co się dzieje, gdy zabraknie czasu na poziomie?",
+    a: "Poziom kończy się bez połączenia. W kampanii możesz od razu spróbować ponownie; w Wyzwaniu dnia czekasz do resetu o północy czasu środkowoeuropejskiego.",
   },
   {
-    q: "Czy w grze występuje hazard albo zakłady na pieniądze?",
-    a: "Nie. Gra nie zawiera hazardu, zakładów ani żadnych elementów losowych wymiennych na prawdziwe pieniądze. Wszystkie nagrody sezonowe są kosmetyczne i przyznawane wyłącznie na podstawie wyniku.",
+    q: "Czy da się grać bez myszy?",
+    a: "Tak. Każdy segment siatki to zwykły przycisk — obracasz go też klawiaturą, przechodząc między segmentami klawiszem Tab i potwierdzając Enterem lub spacją.",
   },
   {
     q: "Na jakich urządzeniach mogę grać?",
@@ -125,7 +125,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Od jakiego wieku można grać?",
-    a: "Gra ma klasyfikację PEGI 3 — nie zawiera przemocy, hazardu ani treści nieodpowiednich dla młodszych odbiorców.",
+    a: "Gra jest odpowiednia dla graczy w każdym wieku — nie zawiera przemocy ani treści, które wymagałyby ograniczenia wiekowego.",
   },
   {
     q: "Czy da się grać bez zakładania konta?",

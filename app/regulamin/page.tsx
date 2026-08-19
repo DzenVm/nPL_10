@@ -3,7 +3,7 @@ import legal from "@/components/legal.module.css";
 
 export const metadata: Metadata = {
   title: "Regulamin",
-  description: "Regulamin korzystania z gry: zasady rozgrywki, konta, rankingu i nagród kosmetycznych.",
+  description: "Regulamin korzystania z gry: zasady rozgrywki, konta i rankingu sezonowego.",
   alternates: { canonical: "/regulamin" },
 };
 
@@ -29,10 +29,9 @@ export default function RegulaminPage() {
         <section>
           <h2>2. Charakter gry</h2>
           <ul>
-            <li>Gra jest bezpłatna i dostępna w przeglądarce, bez konieczności instalacji.</li>
-            <li>Gra nie zawiera hazardu, zakładów wzajemnych ani mechanizmów losowych wymiennych na prawdziwe pieniądze lub inną wartość materialną.</li>
+            <li>Gra jest dostępna w przeglądarce, bez konieczności instalacji dodatkowego oprogramowania.</li>
             <li>Wynik w każdym trybie zależy wyłącznie od umiejętności gracza — czasu rozwiązania i efektywności trasy.</li>
-            <li>Klasyfikacja wiekowa gry to PEGI 3.</li>
+            <li>Gra nie zawiera treści nieodpowiednich dla młodszych odbiorców.</li>
           </ul>
         </section>
 
@@ -48,13 +47,12 @@ export default function RegulaminPage() {
         </section>
 
         <section>
-          <h2>4. Ranking i nagrody</h2>
+          <h2>4. Ranking i personalizacja</h2>
           <p>
             Ranking sezonowy oblicza się na podstawie wyników Pojedynków rankingowych i
-            Turniejów tygodniowych, w cyklach ośmiotygodniowych sezonów. Nagrody sezonowe i
-            turniejowe mają charakter wyłącznie kosmetyczny (warianty kolorystyczne siatki,
-            skórki węzłów), nie dają przewagi w rozgrywce i nie podlegają wymianie na
-            pieniądze ani inne wartości materialne.
+            Turniejów tygodniowych, w cyklach ośmiotygodniowych sezonów. Wygląd siatki i
+            węzłów można zmieniać niezależnie od rangi — to wyłącznie personalizacja
+            profilu, bez wpływu na przebieg rozgrywki.
           </p>
         </section>
 
@@ -69,15 +67,7 @@ export default function RegulaminPage() {
         </section>
 
         <section>
-          <h2>6. Reklamy</h2>
-          <p>
-            Rozwój gry finansowany jest z nieinwazyjnych reklam wyświetlanych zgodnie z
-            wyrażoną zgodą cookie oraz z opcjonalnych, wyłącznie kosmetycznych dodatków.
-          </p>
-        </section>
-
-        <section>
-          <h2>7. Reklamacje</h2>
+          <h2>6. Reklamacje</h2>
           <p>
             Reklamacje dotyczące działania gry można zgłaszać na adres{" "}
             <a href="mailto:kontakt@kewabort.online">kontakt@kewabort.online</a>.
@@ -86,7 +76,7 @@ export default function RegulaminPage() {
         </section>
 
         <section>
-          <h2>8. Zmiany regulaminu</h2>
+          <h2>7. Zmiany regulaminu</h2>
           <p>
             Regulamin może być aktualizowany, w szczególności wraz z wprowadzaniem nowych
             trybów gry. O istotnych zmianach informujemy z odpowiednim wyprzedzeniem na tej

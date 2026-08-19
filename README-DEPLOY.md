@@ -46,8 +46,8 @@ zrób redeploy, żeby zmienna weszła w życie.
       `NEXT_PUBLIC_GTAG_ID` (krok 2) i zweryfikuj tag w Google Tag Assistant.
 - [ ] `sitemap.xml` i `robots.txt` są dostępne pod `/sitemap.xml` i
       `/robots.txt` i wskazują na `https://kewabort.online`.
-- [ ] Treść strony jest zgodna z tym, co reklamujesz (brak zwodniczych
-      obietnic, jasny opis darmowego modelu, brak elementów hazardowych).
+- [ ] Treść strony jest zgodna z tym, co reklamujesz — brak zwodniczych
+      obietnic i nieprawdziwych deklaracji.
 
 ## 5. Aktualizacje
 

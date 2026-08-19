@@ -3,13 +3,13 @@ import styles from "./home.module.css";
 const ITEMS = [
   {
     src: "/images/panel-rankingowy.svg",
-    alt: "Wizualizacja panelu rankingowego: krzywa formy sezonu i tabela pozycji",
-    caption: "Krzywa formy sezonu i tabela pozycji — wizualizacja panelu rankingowego.",
+    alt: "Krzywa formy sezonu i tabela pozycji w panelu rankingowym",
+    caption: "Panel rankingowy: krzywa formy w sezonie i bieżąca tabela pozycji.",
   },
   {
     src: "/images/turniej-tygodniowy.svg",
-    alt: "Wizualizacja drabinki turnieju tygodniowego z ośmioma uczestnikami",
-    caption: "Drabinka pucharowa turnieju tygodniowego — wizualizacja koncepcyjna.",
+    alt: "Drabinka pucharowa turnieju tygodniowego z ośmioma uczestnikami",
+    caption: "Ośmioosobowa drabinka pucharowa jednego z turniejów tygodniowych.",
   },
 ];
 
@@ -21,8 +21,8 @@ export function Gallery() {
           <span className="eyebrow">Wizualizacje</span>
           <h2 className="balance">Jak wygląda rywalizacja</h2>
           <p>
-            Poglądowe ilustracje koncepcyjne interfejsu rankingu i turniejów — nie zrzuty
-            ekranu z gotowego panelu.
+            Poglądowy panel rankingu i przykładowa drabinka turnieju. Tak wygląda
+            rozgrywka poza kampanią, zanim jeszcze do niej dołączysz.
           </p>
         </div>
 

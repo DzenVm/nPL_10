@@ -11,8 +11,8 @@ export function Hero() {
           <p>
             Obracaj segmenty sieci, prowadź impuls energii od generatora do odbiornika i
             reaguj na wzmacniacze, tłumiki oraz węzły sabotujące, zanim skończy się czas.
-            Gra darmowa, oparta wyłącznie na umiejętnościach — bez hazardu i bez płacenia
-            za wygraną.
+            Każdy układ siatki jest inny, a rozwiązanie zależy wyłącznie od tego, jak
+            szybko rozpoznasz właściwą trasę.
           </p>
           <div className={styles.heroActions}>
             <Link href="#demo" className="btn btn-primary">
@@ -23,10 +23,10 @@ export function Hero() {
             </Link>
           </div>
           <div className={styles.trustRow}>
-            <span className="pill">Bez hazardu</span>
-            <span className="pill">PEGI 3</span>
             <span className="pill">Działa w przeglądarce</span>
             <span className="pill">Bez pobierania</span>
+            <span className="pill">Codziennie nowy układ</span>
+            <span className="pill">Obsługa klawiaturą</span>
             <span className="pill">RODO</span>
           </div>
         </div>
@@ -35,7 +35,7 @@ export function Hero() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/siatka-glowna.svg"
-            alt="Wizualizacja siatki węzłów energii z aktywnymi ścieżkami impulsów"
+            alt="Siatka węzłów energii z aktywnymi ścieżkami impulsów"
             width={1600}
             height={1000}
             loading="eager"

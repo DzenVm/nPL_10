@@ -4,8 +4,7 @@ import legal from "@/components/legal.module.css";
 
 export const metadata: Metadata = {
   title: "Rankingi — ocena sezonowa i progresja",
-  description:
-    "Jak działa ranking sezonowy: system oceny, progi rangowe, sezony i wyłącznie kosmetyczne nagrody.",
+  description: "Jak działa ranking sezonowy: system oceny, progi rangowe i sezony.",
   alternates: { canonical: "/rankingi" },
 };
 
@@ -59,12 +58,12 @@ export default function RankingiPage() {
         </section>
 
         <section>
-          <h2>Nagrody</h2>
+          <h2>Personalizacja</h2>
           <p>
-            Wszystkie nagrody sezonowe i turniejowe mają charakter wyłącznie kosmetyczny —
-            warianty kolorystyczne siatki oraz skórki węzłów. Żadna nagroda nie daje
-            przewagi w rozgrywce ani nie jest wymienialna na pieniądze — szczegóły w
-            sekcji <Link href="/#fair-play">fair play</Link> na stronie głównej.
+            Niezależnie od rangi możesz zmieniać wygląd siatki i skórki węzłów — to
+            personalizacja profilu, bez wpływu na przebieg rozgrywki. Zasady uczciwej
+            rywalizacji opisujemy w sekcji{" "}
+            <Link href="/#fair-play">zasady rywalizacji</Link> na stronie głównej.
           </p>
         </section>
       </div>

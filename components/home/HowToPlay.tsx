@@ -19,7 +19,7 @@ const STEPS = [
   },
   {
     title: "Myśl o mocy, nie tylko o połączeniu",
-    text: "Wzmacniacze i tłumiki zmieniają wynik końcowy, nawet jeśli tor już łączy generator z odbiornikiem — czasem opłaca się poprowadzić trasę okrężną.",
+    text: "Wzmacniacze i tłumiki zmieniają wynik końcowy, nawet jeśli tor już łączy generator z odbiornikiem — czasem lepiej poprowadzić trasę okrężną.",
   },
 ];
 

@@ -19,7 +19,7 @@ import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Steruj siecią impulsów energii — darmowa gra logiczno-strategiczna online",
+  title: "Steruj siecią impulsów energii — gra logiczno-strategiczna online",
   description: SITE_DESCRIPTION,
   alternates: { canonical: "/" },
 };
@@ -37,13 +37,6 @@ export default function HomePage() {
     genre: ["Puzzle", "Strategy"],
     gamePlatform: ["Web Browser"],
     applicationCategory: "Game",
-    contentRating: "PEGI 3",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "PLN",
-      availability: "https://schema.org/InStock",
-    },
     audience: {
       "@type": "Audience",
       geographicArea: {

@@ -1,7 +1,7 @@
 export const SITE_URL = "https://kewabort.online";
 
 export const SITE_DESCRIPTION =
-  "Darmowa, przeglądarkowa gra logiczno-strategiczna: przekierowuj impulsy energii między węzłami, zanim siatka się przeciąży. Kampania, wyzwanie dnia, pojedynki rankingowe i turnieje tygodniowe.";
+  "Przeglądarkowa gra logiczno-strategiczna: przekierowuj impulsy energii między węzłami, zanim siatka się przeciąży. Kampania, wyzwanie dnia, pojedynki rankingowe i turnieje tygodniowe.";
 
 export const NAV_LINKS = [
   { href: "/", label: "Strona główna" },

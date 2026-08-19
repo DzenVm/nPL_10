@@ -3,28 +3,28 @@ import styles from "./home.module.css";
 
 const POINTS = [
   {
-    title: "Bez hazardu i zakładów",
-    text: "Żaden element gry nie jest wymienialny na prawdziwe pieniądze ani inną wartość materialną.",
-  },
-  {
-    title: "Wynik zależy od umiejętności",
+    title: "Wynik zależy wyłącznie od umiejętności",
     text: "Ranking i progresja opierają się na czasie rozwiązania oraz efektywności trasy, nie na losowości.",
   },
   {
-    title: "Nagrody wyłącznie kosmetyczne",
-    text: "Sezonowe i turniejowe nagrody to warianty kolorystyczne siatki oraz skórki węzłów.",
+    title: "Ochrona przed nieuczciwą grą",
+    text: "Automatyzacja rozgrywki i wielokrotne konta w trybach rankingowych są wykrywane i usuwane z tabel wyników.",
   },
   {
-    title: "Klasyfikacja PEGI 3",
-    text: "Gra nie zawiera przemocy ani treści nieodpowiednich dla młodszych odbiorców.",
+    title: "Pełna obsługa klawiatury",
+    text: "Każdy segment siatki to zwykły przycisk — sterujesz nim też przez Tab i Enter, bez potrzeby używania myszy.",
   },
   {
     title: "Zgodność z RODO",
-    text: "Dane analityczne i reklamowe przetwarzamy wyłącznie po uzyskaniu zgody — patrz polityka prywatności.",
+    text: "Dane przetwarzamy wyłącznie w zakresie potrzebnym do działania gry i — po Twojej zgodzie — do statystyk. Szczegóły opisuje polityka prywatności.",
   },
   {
-    title: "Przejrzysty model finansowania",
-    text: "Gra jest darmowa; rozwój finansują nieinwazyjne reklamy i opcjonalne dodatki kosmetyczne.",
+    title: "Trwały postęp",
+    text: "Wynik w kampanii, ranga sezonowa i historia Pojedynków zapisują się na koncie między sesjami.",
+  },
+  {
+    title: "Codziennie nowa siatka",
+    text: "Wyzwanie dnia generuje się od nowa co 24 godziny — nie da się go rozegrać dwa razy na tym samym układzie.",
   },
 ];
 
@@ -34,9 +34,9 @@ export function Compliance() {
       <div className="wrap">
         <div className="section-head">
           <span className="eyebrow">
-            <ShieldIcon size={14} /> Fair play i zgodność
+            <ShieldIcon size={14} /> Zasady rywalizacji
           </span>
-          <h2 className="balance">Gra bez hazardu, oparta na umiejętnościach</h2>
+          <h2 className="balance">Rywalizacja oparta wyłącznie na umiejętnościach</h2>
         </div>
 
         <div className={styles.complianceGrid}>

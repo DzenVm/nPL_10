@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// Proceduralny generator ilustracji SVG dla galerii na stronie głównej.
-// Deterministyczny (seed -> ten sam wynik), bez zewnętrznych bibliotek grafiki
-// i bez żadnych zasobów zewnętrznych — cała grafika to wygenerowana geometria.
+// Generator ilustracji SVG dla strony głównej. Deterministyczny (ten sam
+// seed daje ten sam wynik) i oparty o rzeczywistą geometrię siatki gry —
+// bez losowego "szumu" w tle, żeby wyglądało na świadomie zaprojektowane,
+// a nie na przypadkową generatywną grafikę.
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -18,10 +19,12 @@ const PALETTE = {
   cyan: "#4cf1e0",
   amber: "#ffb454",
   violet: "#b39bff",
-  rose: "#ff6b81",
   ink1: "#eef2fb",
   ink3: "#7482a8",
 };
+
+const NORTH = 1, EAST = 2, SOUTH = 4, WEST = 8;
+const DELTA = { [NORTH]: [0, -1], [EAST]: [1, 0], [SOUTH]: [0, 1], [WEST]: [-1, 0] };
 
 function mulberry32(seed) {
   let a = seed >>> 0;
@@ -53,17 +56,16 @@ ${body}
 
 function backdrop(width, height, id) {
   return `<defs>
-  <radialGradient id="bgrad-${id}" cx="18%" cy="0%" r="95%">
+  <linearGradient id="bgrad-${id}" x1="0%" y1="0%" x2="100%" y2="100%">
     <stop offset="0%" stop-color="${PALETTE.bg2}"/>
-    <stop offset="55%" stop-color="${PALETTE.bg1}"/>
     <stop offset="100%" stop-color="${PALETTE.bg0}"/>
-  </radialGradient>
-  <linearGradient id="pulse-${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+  </linearGradient>
+  <linearGradient id="pulse-${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${width}" y2="${height}">
     <stop offset="0%" stop-color="${PALETTE.cyan}"/>
     <stop offset="100%" stop-color="${PALETTE.violet}"/>
   </linearGradient>
-  <filter id="glow-${id}" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur stdDeviation="6" result="blur"/>
+  <filter id="glow-${id}" filterUnits="userSpaceOnUse" x="-40" y="-40" width="${width + 80}" height="${height + 80}">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
     <feMerge>
       <feMergeNode in="blur"/>
       <feMergeNode in="SourceGraphic"/>
@@ -73,80 +75,119 @@ function backdrop(width, height, id) {
 <rect width="${width}" height="${height}" fill="url(#bgrad-${id})"/>`;
 }
 
-function scatterParticles(rand, width, height, count, color) {
-  let out = "";
-  for (let i = 0; i < count; i++) {
-    const x = rand() * width;
-    const y = rand() * height;
-    const r = 0.6 + rand() * 1.8;
-    const o = 0.15 + rand() * 0.35;
-    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" fill="${color}" opacity="${o.toFixed(2)}"/>\n`;
+function sunGlyph(cx, cy, r, color, id) {
+  let rays = "";
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const x1 = cx + Math.cos(a) * (r + 8), y1 = cy + Math.sin(a) * (r + 8);
+    const x2 = cx + Math.cos(a) * (r + 22), y2 = cy + Math.sin(a) * (r + 22);
+    rays += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="3" stroke-linecap="round"/>`;
   }
-  return out;
+  return `${rays}<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" filter="url(#glow-${id})"/>`;
 }
 
-// 1) Siatka główna — węzły i połączenia impulsów energii.
+function targetGlyph(cx, cy, r, color, id) {
+  return `<circle cx="${cx}" cy="${cy}" r="${r * 1.7}" fill="none" stroke="${color}" stroke-width="2.5" opacity="0.4"/>
+<circle cx="${cx}" cy="${cy}" r="${r * 1.05}" fill="none" stroke="${color}" stroke-width="2.5" opacity="0.7"/>
+<circle cx="${cx}" cy="${cy}" r="${r * 0.45}" fill="${color}" filter="url(#glow-${id})"/>`;
+}
+
+function randomPath(cols, rows, start, end, rand) {
+  const visited = new Set();
+  const path = [];
+  const dirs = [NORTH, EAST, SOUTH, WEST];
+  const key = (c, r) => `${c},${r}`;
+
+  function shuffledByDistance(c, r) {
+    return dirs
+      .map((d) => [d, rand()])
+      .sort((a, b) => {
+        const [dax, day] = DELTA[a[0]];
+        const [dbx, dby] = DELTA[b[0]];
+        const da = Math.abs(c + dax - end[0]) + Math.abs(r + day - end[1]);
+        const db = Math.abs(c + dbx - end[0]) + Math.abs(r + dby - end[1]);
+        return da - db + (a[1] - b[1]) * 2.4;
+      })
+      .map(([d]) => d);
+  }
+
+  function dfs(c, r) {
+    visited.add(key(c, r));
+    path.push([c, r]);
+    if (c === end[0] && r === end[1]) return true;
+    for (const d of shuffledByDistance(c, r)) {
+      const [dx, dy] = DELTA[d];
+      const nc = c + dx, nr = r + dy;
+      if (nc < 0 || nc >= cols || nr < 0 || nr >= rows) continue;
+      if (visited.has(key(nc, nr))) continue;
+      if (dfs(nc, nr)) return true;
+    }
+    path.pop();
+    visited.delete(key(c, r));
+    return false;
+  }
+
+  dfs(start[0], start[1]);
+  return path;
+}
+
+// 1) Siatka gry — czytelna plansza z jedną aktywną trasą, w tym samym
+// języku wizualnym co grywalne demo na stronie głównej.
 function imageGridOverview(seed) {
   const rand = mulberry32(seed);
   const W = 1600, H = 1000, id = "grid";
-  const cols = 12, rows = 8;
-  const padX = 140, padY = 120;
-  const cellW = (W - padX * 2) / (cols - 1);
-  const cellH = (H - padY * 2) / (rows - 1);
-  const nodeTypes = [
-    { color: PALETTE.amber, weight: 0.16 },
-    { color: PALETTE.cyan, weight: 0.16 },
-    { color: PALETTE.violet, weight: 0.1 },
-    { color: PALETTE.ink3, weight: 0.58 },
-  ];
-  const nodes = [];
+  const cols = 9, rows = 5;
+  const pad = 150;
+  const cellW = (W - pad * 2) / cols;
+  const cellH = (H - pad * 2) / rows;
+  const center = (c, r) => [pad + cellW * (c + 0.5), pad + cellH * (r + 0.5)];
+
+  const sourceRow = 1 + Math.floor(rand() * (rows - 2));
+  let sinkRow = 1 + Math.floor(rand() * (rows - 2));
+  if (sinkRow === sourceRow) sinkRow = (sinkRow + 2) % rows;
+  const start = [0, sourceRow];
+  const end = [cols - 1, sinkRow];
+  const path = randomPath(cols, rows, start, end, rand);
+
+  let tiles = "";
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      const jitterX = (rand() - 0.5) * cellW * 0.35;
-      const jitterY = (rand() - 0.5) * cellH * 0.35;
-      const x = padX + c * cellW + jitterX;
-      const y = padY + r * cellH + jitterY;
-      let roll = rand(), acc = 0, type = nodeTypes[nodeTypes.length - 1];
-      for (const t of nodeTypes) {
-        acc += t.weight;
-        if (roll <= acc) { type = t; break; }
-      }
-      nodes.push({ x, y, r: r === Math.floor(rows/2) && c === Math.floor(cols/2) ? 8 : 3 + rand() * 3, color: type.color });
+      const [x, y] = center(c, r);
+      const s = Math.min(cellW, cellH) * 0.64;
+      tiles += `<rect x="${(x - s / 2).toFixed(1)}" y="${(y - s / 2).toFixed(1)}" width="${s.toFixed(1)}" height="${s.toFixed(1)}" rx="10" fill="none" stroke="${PALETTE.line}" stroke-width="1.5" opacity="0.55"/>`;
     }
   }
-  const idx = (c, r) => r * cols + c;
-  let edges = "";
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      if (c < cols - 1 && rand() > 0.28) {
-        const a = nodes[idx(c, r)], b = nodes[idx(c + 1, r)];
-        edges += line(a, b, rand);
-      }
-      if (r < rows - 1 && rand() > 0.32) {
-        const a = nodes[idx(c, r)], b = nodes[idx(c, r + 1)];
-        edges += line(a, b, rand);
-      }
-    }
+
+  let route = "";
+  for (let i = 0; i < path.length - 1; i++) {
+    const [x1, y1] = center(...path[i]);
+    const [x2, y2] = center(...path[i + 1]);
+    route += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="url(#pulse-${id})" stroke-width="5" stroke-linecap="round" filter="url(#glow-${id})"/>`;
   }
-  function line(a, b, rand) {
-    const active = rand() > 0.72;
-    const stroke = active ? `url(#pulse-${id})` : PALETTE.line;
-    const width = active ? 2.4 : 1;
-    const op = active ? 0.95 : 0.55;
-    return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="${stroke}" stroke-width="${width}" opacity="${op}" ${active ? `filter="url(#glow-${id})"` : ""}/>\n`;
-  }
-  const dots = nodes.map(n => `<circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${n.r.toFixed(1)}" fill="${n.color}" ${n.r > 6 ? `filter="url(#glow-${id})"` : ""}/>`).join("\n");
+  path.slice(1, -1).forEach(([c, r]) => {
+    const [x, y] = center(c, r);
+    route += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="${PALETTE.ink1}"/>`;
+  });
+
+  const [sx, sy] = center(...start);
+  const [ex, ey] = center(...end);
+  const nodeR = Math.min(cellW, cellH) * 0.18;
+
   const body = `${backdrop(W, H, id)}
-${scatterParticles(rand, W, H, 70, PALETTE.ink3)}
-<g>${edges}</g>
-<g>${dots}</g>`;
-  return svgDoc(W, H, body, { title: "Wizualizacja siatki węzłów i impulsów energii", desc: "Abstrakcyjna wizualizacja rozgrywki: węzły połączone aktywnymi ścieżkami impulsów." });
+<g>${tiles}</g>
+<g>${route}</g>
+${sunGlyph(sx, sy, nodeR, PALETTE.amber, id)}
+${targetGlyph(ex, ey, nodeR, PALETTE.cyan, id)}`;
+  return svgDoc(W, H, body, {
+    title: "Plansza gry z aktywną trasą impulsu",
+    desc: "Siatka segmentów z zaznaczoną trasą od generatora do odbiornika.",
+  });
 }
 
 // 2) Typy węzłów — cztery symbole roli w rzędzie.
-function imageNodeTypes(seed) {
-  const rand = mulberry32(seed);
-  const W = 1400, H = 900, id = "nodes";
+function imageNodeTypes() {
+  const id = "nodes";
+  const W = 1400, H = 900;
   const items = [
     { label: "Generator", sub: "źródło impulsu", color: PALETTE.amber, glyph: "sun" },
     { label: "Odbiornik", sub: "cel trasy", color: PALETTE.cyan, glyph: "target" },
@@ -160,20 +201,10 @@ function imageNodeTypes(seed) {
 
   function glyph(item, cx) {
     switch (item.glyph) {
-      case "sun": {
-        let rays = "";
-        for (let i = 0; i < 8; i++) {
-          const a = (i / 8) * Math.PI * 2;
-          const x1 = cx + Math.cos(a) * 46, y1 = cy + Math.sin(a) * 46;
-          const x2 = cx + Math.cos(a) * 68, y2 = cy + Math.sin(a) * 68;
-          rays += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${item.color}" stroke-width="4" stroke-linecap="round"/>`;
-        }
-        return `${rays}<circle cx="${cx}" cy="${cy}" r="38" fill="${item.color}" filter="url(#glow-${id})"/>`;
-      }
+      case "sun":
+        return sunGlyph(cx, cy, 38, item.color, id);
       case "target":
-        return `<circle cx="${cx}" cy="${cy}" r="60" fill="none" stroke="${item.color}" stroke-width="3" opacity="0.35"/>
-<circle cx="${cx}" cy="${cy}" r="40" fill="none" stroke="${item.color}" stroke-width="3" opacity="0.65"/>
-<circle cx="${cx}" cy="${cy}" r="18" fill="${item.color}" filter="url(#glow-${id})"/>`;
+        return targetGlyph(cx, cy, 22, item.color, id);
       case "chevrons": {
         let out = "";
         [-24, 6, 36].forEach((dy, i) => {
@@ -194,25 +225,25 @@ function imageNodeTypes(seed) {
     const x = startX + i * (cardW + gap);
     const cx = x + cardW / 2;
     cards += `<g>
-<rect x="${x}" y="${H/2 - 210}" width="${cardW}" height="420" rx="26" fill="${PALETTE.bg2}" stroke="${PALETTE.line}" stroke-width="1.5"/>
+<rect x="${x}" y="${H / 2 - 210}" width="${cardW}" height="420" rx="26" fill="${PALETTE.bg2}" stroke="${PALETTE.line}" stroke-width="1.5"/>
 ${glyph(item, cx)}
-<text x="${cx}" y="${H/2 + 150}" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="${PALETTE.ink1}">${item.label}</text>
-<text x="${cx}" y="${H/2 + 182}" text-anchor="middle" font-family="sans-serif" font-size="16" fill="${PALETTE.ink3}">${item.sub}</text>
+<text x="${cx}" y="${H / 2 + 150}" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="${PALETTE.ink1}">${item.label}</text>
+<text x="${cx}" y="${H / 2 + 182}" text-anchor="middle" font-family="sans-serif" font-size="16" fill="${PALETTE.ink3}">${item.sub}</text>
 </g>`;
   });
 
   const body = `${backdrop(W, H, id)}
-${scatterParticles(rand, W, H, 40, PALETTE.ink3)}
 ${cards}`;
   return svgDoc(W, H, body, { title: "Cztery typy węzłów w grze", desc: "Ilustracja przedstawiająca generator, odbiornik, wzmacniacz i tłumik." });
 }
 
-// 3) Panel rankingowy — abstrakcyjny wykres formy i lista pozycji.
+// 3) Panel rankingowy — krzywa formy i lista pozycji.
 function imageRankingPanel(seed) {
   const rand = mulberry32(seed);
-  const W = 1400, H = 900, id = "rank";
+  const id = "rank";
+  const W = 1400, H = 900;
   const chartX = 90, chartY = 90, chartW = 760, chartH = 420;
-  let points = [];
+  const points = [];
   let v = 0.35;
   const n = 22;
   for (let i = 0; i < n; i++) {
@@ -233,33 +264,33 @@ function imageRankingPanel(seed) {
   const rows = 6;
   const listX = chartX + chartW + 60;
   const listW = W - listX - 70;
+  const barWidths = [0.92, 0.8, 0.71, 0.63, 0.55, 0.47];
   let list = "";
   for (let i = 0; i < rows; i++) {
     const y = chartY + i * 62;
-    const barW = listW * (0.35 + rand() * 0.6);
+    const barW = listW * barWidths[i];
     const highlight = i === 0;
     list += `<g>
 <circle cx="${listX + 16}" cy="${y + 20}" r="15" fill="${highlight ? PALETTE.amber : PALETTE.bg2}" stroke="${PALETTE.line}"/>
-<text x="${listX + 16}" y="${y + 25}" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="${highlight ? PALETTE.bg0 : PALETTE.ink2 || PALETTE.ink3}">${i + 1}</text>
+<text x="${listX + 16}" y="${y + 25}" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="${highlight ? PALETTE.bg0 : PALETTE.ink3}">${i + 1}</text>
 <rect x="${listX + 44}" y="${y + 8}" width="${barW.toFixed(1)}" height="24" rx="12" fill="${highlight ? "url(#pulse-" + id + ")" : PALETTE.bg2}" opacity="${highlight ? 0.95 : 0.8}"/>
 </g>`;
   }
 
   const body = `${backdrop(W, H, id)}
-${scatterParticles(rand, W, H, 50, PALETTE.ink3)}
 ${gridLines}
 <path d="${area}" fill="url(#pulse-${id})" opacity="0.14"/>
 <path d="${path}" fill="none" stroke="url(#pulse-${id})" stroke-width="3.5" filter="url(#glow-${id})"/>
 ${list}
 <text x="${chartX}" y="${chartY - 26}" font-family="sans-serif" font-size="20" font-weight="700" fill="${PALETTE.ink1}">Krzywa formy sezonu</text>
 <text x="${listX + 44}" y="${chartY - 26}" font-family="sans-serif" font-size="20" font-weight="700" fill="${PALETTE.ink1}">Tabela pozycji</text>`;
-  return svgDoc(W, H, body, { title: "Panel rankingowy sezonu", desc: "Abstrakcyjna wizualizacja krzywej rankingu i tabeli pozycji." });
+  return svgDoc(W, H, body, { title: "Panel rankingowy sezonu", desc: "Wykres formy w sezonie i tabela bieżących pozycji." });
 }
 
 // 4) Wyzwanie dnia — kalendarz + odliczanie.
-function imageDailyChallenge(seed) {
-  const rand = mulberry32(seed);
-  const W = 1400, H = 900, id = "daily";
+function imageDailyChallenge() {
+  const id = "daily";
+  const W = 1400, H = 900;
   const cols = 7, rows = 4;
   const cell = 80, gap = 14;
   const gridW = cols * cell + (cols - 1) * gap;
@@ -272,9 +303,9 @@ function imageDailyChallenge(seed) {
       const x = startX + c * (cell + gap);
       const y = startY + r * (cell + gap);
       const isToday = i === todayIndex;
-      cells += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="16" fill="${isToday ? "url(#pulse-" + id + ")" : PALETTE.bg2}" stroke="${isToday ? "none" : PALETTE.line}" ${isToday ? `filter="url(#glow-${id})"` : ""} opacity="${isToday ? 0.95 : 0.7 + rand() * 0.2}"/>`;
+      cells += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="16" fill="${isToday ? "url(#pulse-" + id + ")" : PALETTE.bg2}" stroke="${isToday ? "none" : PALETTE.line}" ${isToday ? `filter="url(#glow-${id})"` : ""} opacity="${isToday ? 0.95 : 0.85}"/>`;
       if (isToday) {
-        cells += `<circle cx="${x + cell/2}" cy="${y + cell/2}" r="10" fill="${PALETTE.bg0}"/>`;
+        cells += `<circle cx="${x + cell / 2}" cy="${y + cell / 2}" r="10" fill="${PALETTE.bg0}"/>`;
       }
     }
   }
@@ -290,7 +321,6 @@ function imageDailyChallenge(seed) {
   }).join("");
 
   const body = `${backdrop(W, H, id)}
-${scatterParticles(rand, W, H, 40, PALETTE.ink3)}
 ${cells}
 ${ticks}
 <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${PALETTE.line}" stroke-width="14"/>
@@ -300,19 +330,20 @@ ${ticks}
 <text x="${cx}" y="${cy - 6}" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="700" fill="${PALETTE.ink1}">1× / 24h</text>
 <text x="${cx}" y="${cy + 28}" text-anchor="middle" font-family="sans-serif" font-size="15" fill="${PALETTE.ink3}">nowy układ siatki</text>
 <text x="${startX}" y="${startY - 40}" font-family="sans-serif" font-size="20" font-weight="700" fill="${PALETTE.ink1}">Wyzwanie dnia</text>`;
-  return svgDoc(W, H, body, { title: "Wyzwanie dnia — wspólny układ na 24 godziny", desc: "Abstrakcyjna wizualizacja kalendarza wyzwań i odliczania do resetu." });
+  return svgDoc(W, H, body, { title: "Wyzwanie dnia — wspólny układ na 24 godziny", desc: "Kalendarz wyzwań dnia i odliczanie do resetu." });
 }
 
 // 5) Turniej tygodniowy — drabinka.
 function imageTournamentBracket(seed) {
   const rand = mulberry32(seed);
-  const W = 1400, H = 900, id = "bracket";
+  const id = "bracket";
+  const W = 1400, H = 900;
   const roundsX = [140, 460, 780, 1100];
   const leafCount = 8;
   const leafGap = 90;
   const leafStartY = 120;
-  let nodesByRound = [];
-  let leaves = [];
+  const nodesByRound = [];
+  const leaves = [];
   for (let i = 0; i < leafCount; i++) {
     leaves.push({ x: roundsX[0], y: leafStartY + i * leafGap });
   }
@@ -349,20 +380,19 @@ function imageTournamentBracket(seed) {
   }
 
   const body = `${backdrop(W, H, id)}
-${scatterParticles(rand, W, H, 40, PALETTE.ink3)}
 ${connectors}
 ${dots}
 <text x="140" y="70" font-family="sans-serif" font-size="20" font-weight="700" fill="${PALETTE.ink1}">Turniej tygodniowy — drabinka</text>
-<text x="${roundsX[roundsX.length-1] - 30}" y="${nodesByRound[nodesByRound.length-1][0].y - 26}" font-family="sans-serif" font-size="15" fill="${PALETTE.ink3}">finał</text>`;
-  return svgDoc(W, H, body, { title: "Drabinka turnieju tygodniowego", desc: "Abstrakcyjna wizualizacja rundy pucharowej z ośmioma uczestnikami." });
+<text x="${roundsX[roundsX.length - 1] - 30}" y="${nodesByRound[nodesByRound.length - 1][0].y - 26}" font-family="sans-serif" font-size="15" fill="${PALETTE.ink3}">finał</text>`;
+  return svgDoc(W, H, body, { title: "Drabinka turnieju tygodniowego", desc: "Runda pucharowa z ośmioma uczestnikami." });
 }
 
 const files = [
-  { name: "siatka-glowna.svg", seed: seedFromString("siatka-glowna-v1"), gen: imageGridOverview },
-  { name: "typy-wezlow.svg", seed: seedFromString("typy-wezlow-v1"), gen: imageNodeTypes },
-  { name: "panel-rankingowy.svg", seed: seedFromString("panel-rankingowy-v1"), gen: imageRankingPanel },
-  { name: "wyzwanie-dnia.svg", seed: seedFromString("wyzwanie-dnia-v1"), gen: imageDailyChallenge },
-  { name: "turniej-tygodniowy.svg", seed: seedFromString("turniej-tygodniowy-v1"), gen: imageTournamentBracket },
+  { name: "siatka-glowna.svg", seed: seedFromString("siatka-glowna-v2"), gen: imageGridOverview },
+  { name: "typy-wezlow.svg", seed: seedFromString("typy-wezlow-v2"), gen: imageNodeTypes },
+  { name: "panel-rankingowy.svg", seed: seedFromString("panel-rankingowy-v2"), gen: imageRankingPanel },
+  { name: "wyzwanie-dnia.svg", seed: seedFromString("wyzwanie-dnia-v2"), gen: imageDailyChallenge },
+  { name: "turniej-tygodniowy.svg", seed: seedFromString("turniej-tygodniowy-v2"), gen: imageTournamentBracket },
 ];
 
 for (const f of files) {

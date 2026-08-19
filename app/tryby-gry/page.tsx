@@ -27,9 +27,9 @@ const DETAILS: Record<string, string[]> = {
     "Wygrywa krótszy czas rozwiązania przy mniejszej liczbie obrotów; wynik wpływa na ocenę sezonową.",
   ],
   turniej: [
-    "Drabinka pucharowa rozgrywana w ciągu tygodnia, zapisy dobrowolne i bezpłatne.",
+    "Drabinka pucharowa rozgrywana w ciągu tygodnia, zapisy dobrowolne dla każdego konta.",
     "Każda runda to osobno wygenerowana siatka — awans do kolejnej rundy zależy wyłącznie od wyniku.",
-    "Nagrody są wyłącznie kosmetyczne: warianty kolorystyczne siatki i skórki węzłów.",
+    "Ranga zdobyta w finale liczy się do rankingu sezonowego.",
   ],
 };
 

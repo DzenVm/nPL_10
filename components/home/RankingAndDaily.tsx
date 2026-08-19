@@ -31,8 +31,8 @@ export function RankingAndDaily({ daily }: { daily: ReturnType<typeof getDailyCh
               względnie równych zasadach.
             </p>
             <p className="mt-0">
-              Nagrody sezonowe to wyłącznie kosmetyczne warianty kolorystyczne siatki i
-              skórki węzłów — nie dają przewagi w rozgrywce i nie mają wartości pieniężnej.
+              Wygląd siatki i skórki węzłów możesz zmieniać niezależnie od rangi — to
+              personalizacja profilu, bez wpływu na samą rozgrywkę.
             </p>
             <div style={{ marginTop: "0.5rem" }}>
               {RANK_TIERS.map((tier) => (
@@ -63,7 +63,7 @@ export function RankingAndDaily({ daily }: { daily: ReturnType<typeof getDailyCh
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/wyzwanie-dnia.svg"
-              alt="Wizualizacja kalendarza wyzwań dnia i odliczania do resetu"
+              alt="Kalendarz wyzwań dnia z odliczaniem do najbliższego resetu"
               width={1400}
               height={900}
               loading="lazy"

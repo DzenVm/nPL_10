@@ -1,6 +1,5 @@
 // Logika "Wyzwania dnia" liczona na serwerze, przy każdym żądaniu (stąd realny SSR
-// na stronie głównej — to nie jest kosmetyczna flaga, tylko realna zależność
-// od bieżącej daty w strefie Europe/Warsaw).
+// na stronie głównej) — zależy od bieżącej daty w strefie Europe/Warsaw.
 
 function warsawParts(date: Date) {
   const fmt = new Intl.DateTimeFormat("en-US", {

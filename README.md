@@ -46,9 +46,8 @@ Aplikacja wystartuje na `http://localhost:3000`.
 | `npm run lint`          | ESLint                                                        |
 | `npm run generate:art`  | Ponowne wygenerowanie ilustracji SVG w `public/images/`       |
 
-## Zgodność z politykami reklamowymi
+## Dokumenty i polityki
 
-Gra nie zawiera hazardu, zakładów ani mechanizmów losowych wymiennych na
-pieniądze — wynik zależy wyłącznie od umiejętności. Zobacz `/regulamin`,
-`/polityka-prywatnosci` i `/polityka-cookie`. Szczegóły wdrożenia (domena,
-zmienne środowiskowe) opisuje `README-DEPLOY.md`.
+Regulamin, polityka prywatności i polityka cookie znajdują się pod
+`/regulamin`, `/polityka-prywatnosci` i `/polityka-cookie`. Szczegóły
+wdrożenia (domena, zmienne środowiskowe) opisuje `README-DEPLOY.md`.
