@@ -1,7 +1,14 @@
 import { PulseGridDemo } from "@/components/PulseGridDemo";
+import { generatePuzzle, randomSeed } from "@/lib/pulseGrid";
 import styles from "./home.module.css";
 
 export function DemoSection() {
+  // Plansza jest wygenerowana tu, na serwerze, przy każdym żądaniu (strona
+  // jest już renderowana per żądanie — patrz app/page.tsx) — dzięki temu
+  // trafia od razu do znacznika HTML jako gotowa, grywalna siatka, zamiast
+  // pojawiać się dopiero po stronie klienta.
+  const initialPuzzle = generatePuzzle(randomSeed());
+
   return (
     <section className="section" id="demo">
       <div className="wrap">
@@ -15,7 +22,7 @@ export function DemoSection() {
           </p>
         </div>
 
-        <PulseGridDemo />
+        <PulseGridDemo initialPuzzle={initialPuzzle} />
 
         <p className={styles.demoNote}>
           Pełna wersja gry dodaje do tego wzmacniacze, tłumiki i losowe węzły sabotujące

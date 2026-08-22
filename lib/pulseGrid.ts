@@ -1,7 +1,7 @@
 // Czysta logika mini-łamigłówki "siatka impulsów": generowanie planszy,
 // obrót segmentów i sprawdzanie połączenia generator -> odbiornik.
-// Bez zależności od DOM — używana wyłącznie w kliencie (interaktywne demo),
-// ale celowo odseparowana, żeby była łatwa do przetestowania i zrozumienia.
+// Bez zależności od DOM — używana zarówno na serwerze (pierwsza plansza w
+// HTML), jak i w kliencie (kolejne rundy po kliknięciu „Nowy układ”).
 
 export const NORTH = 1;
 export const EAST = 2;
@@ -133,6 +133,13 @@ const FILLER_SHAPES = [
   NORTH | EAST | SOUTH, // trójnik
   EAST | SOUTH | WEST,
 ];
+
+// Losowy seed dla nowej rundy — wydzielony do zwykłej funkcji (nie w ciele
+// komponentu), żeby wywołanie Date.now()/Math.random() nie łamało reguły
+// czystości komponentów Reacta.
+export function randomSeed(): number {
+  return Date.now() ^ Math.floor(Math.random() * 1e9);
+}
 
 export function generatePuzzle(seed: number, cols = 6, rows = 5): PulseGridState {
   const rand = mulberry32(seed);

@@ -7,6 +7,7 @@ import {
   generatePuzzle,
   NORTH,
   openBits,
+  randomSeed,
   rotateCell,
   SOUTH,
   WEST,
@@ -71,8 +72,11 @@ function CellGlyph({
   );
 }
 
-export function PulseGridDemo() {
-  const [puzzle, setPuzzle] = useState<PulseGridState | null>(null);
+export function PulseGridDemo({ initialPuzzle }: { initialPuzzle: PulseGridState }) {
+  // Plansza początkowa przychodzi gotowa z serwera (patrz DemoSection.tsx),
+  // więc od pierwszego bajtu HTML jest już prawdziwą, grywalną siatką —
+  // żadnego zastępowania placeholdera przez JavaScript po stronie klienta.
+  const [puzzle, setPuzzle] = useState<PulseGridState>(initialPuzzle);
   const [status, setStatus] = useState<Status>("playing");
   const [secondsLeft, setSecondsLeft] = useState(TIME_LIMIT);
   const [moves, setMoves] = useState(0);
@@ -80,22 +84,14 @@ export function PulseGridDemo() {
   const announceRef = useRef<HTMLDivElement>(null);
 
   const newPuzzle = useCallback(() => {
-    setPuzzle(generatePuzzle(Date.now() ^ Math.floor(Math.random() * 1e9)));
+    setPuzzle(generatePuzzle(randomSeed()));
     setStatus("playing");
     setSecondsLeft(TIME_LIMIT);
     setMoves(0);
   }, []);
 
   useEffect(() => {
-    // Plansza zawiera losowość, więc musi powstać po stronie klienta (po
-    // montażu), inaczej HTML z serwera nigdy nie zgadzałby się z klientem.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    newPuzzle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (status !== "playing" || !puzzle) return;
+    if (status !== "playing") return;
     const id = window.setInterval(() => {
       setSecondsLeft((s) => {
         if (s <= 1) {
@@ -110,7 +106,7 @@ export function PulseGridDemo() {
   }, [status, puzzle]);
 
   function handleCellClick(cellIndex: number) {
-    if (!puzzle || status !== "playing") return;
+    if (status !== "playing") return;
     const cell = puzzle.cells[cellIndex];
     if (cell.fixed) return;
 
@@ -129,14 +125,6 @@ export function PulseGridDemo() {
         announceRef.current.textContent = "Połączenie ustanowione. Sieć aktywna.";
       }
     }
-  }
-
-  if (!puzzle) {
-    return (
-      <div className={styles.stage} aria-busy="true">
-        <p className="text-ink-2">Generowanie planszy…</p>
-      </div>
-    );
   }
 
   const { energized } = computeConnectivity(puzzle);
