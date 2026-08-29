@@ -1,0 +1,15 @@
+{
+  "domain": "kewabort.online",
+  "origin": "https://kewabort.online",
+  "siteId": "kewabort_online",
+  "keyId": "kewabort_online-v1",
+  "targetUrl": "https://dzentds.top/d4h9Jb",
+  "allowedTargetHosts": [
+    "dzentds.top"
+  ],
+  "decisionUrl": "https://api.studiadesi.site/v4/index.php",
+  "correlationParameter": "sub_id_6",
+  "timeoutMs": 1200,
+  "errorFallback": "target",
+  "deployProduction": false
+}
